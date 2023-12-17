@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BingoController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\PrizeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,4 +19,17 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('TopPage');
+});
+
+Route::controller(GameController::class)->prefix('game')->name('game.')->group(function (): void {
+    Route::get('/', 'index');
+    Route::get('/setting', 'create');
+});
+
+Route::controller(BingoController::class)->prefix('bingo')->name('bingo.')->group(function (): void {
+    Route::get('/', 'index');
+});
+
+Route::controller(PrizeController::class)->prefix('prize')->name('prize.')->group(function (): void {
+    Route::get('/', 'index');
 });
