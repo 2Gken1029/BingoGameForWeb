@@ -1,7 +1,8 @@
 import React from "react";
+import { router } from "@inertiajs/react";
 
 const TopPage = () => {
-    return <div>テスト</div>;
+    return <div>トップページ</div>;
 };
 
 export default TopPage;
