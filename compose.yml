@@ -1,0 +1,34 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3309"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: bingogame-db
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - bingogame-net
+
+  admin-php:
+    build: ./docker/php
+    ports:
+      - "8000:80"
+      - "5173:5173"
+    volumes:
+      - ./src/:/var/www/html
+      # - ./docker/app/apache2/apache2.conf:/etc/apache2/apache2.conf
+    depends_on:
+      - db
+    networks:
+      - bingogame-net
+
+networks:
+  bingogame-net:
+    driver: bridge
+    name: bingogame-network
