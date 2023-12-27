@@ -11,4 +11,9 @@ class BingoController extends Controller
     {
         return Inertia::render('Bingo/Index');
     }
+
+    public function show()
+    {
+        return Inertia::render('Bingo/Show');
+    }
 }

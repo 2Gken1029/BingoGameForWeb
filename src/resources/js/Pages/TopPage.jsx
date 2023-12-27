@@ -1,8 +1,25 @@
 import React from "react";
 import Button from "../component/Button";
+import { router } from "@inertiajs/react";
 
-const handleClick = () => {
-    console.log("test");
+const transitionGameIndex = () => {
+    router.get("/games"); // GameList
+};
+
+const transitionGameSetting = () => {
+    router.get("/games/setting"); // GameSetting
+};
+
+const transitionBingoIndex = () => {
+    router.get("/bingo"); // StartPage
+};
+
+const transitionBingoGame = () => {
+    router.get("/bingo/game"); // Bingo
+};
+
+const transitionPrizeIndex = () => {
+    router.get("/prize"); // PrizeList
 };
 
 const TopPage = () => {
@@ -10,22 +27,29 @@ const TopPage = () => {
         <>
             <div>トップページ</div>
             <Button
-                size="small"
-                importance="low"
-                text="Small Low"
-                onClick={handleClick}
+                size="medium"
+                text="GameList"
+                onClick={transitionGameIndex}
             />
             <Button
                 size="medium"
-                importance="medium"
-                text="Medium Medium"
-                onClick={handleClick}
+                text="GameSetting"
+                onClick={transitionGameSetting}
             />
             <Button
-                size="large"
-                importance="high"
-                text="Large High"
-                onClick={handleClick}
+                size="medium"
+                text="BingoIndex"
+                onClick={transitionBingoIndex}
+            />
+            <Button
+                size="medium"
+                text="BingoGame"
+                onClick={transitionBingoGame}
+            />
+            <Button
+                size="medium"
+                text="PrizeIndex"
+                onClick={transitionPrizeIndex}
             />
         </>
     );

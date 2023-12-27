@@ -21,15 +21,16 @@ Route::get('/', function () {
     return Inertia::render('TopPage');
 });
 
-Route::controller(GameController::class)->prefix('game')->name('game.')->group(function (): void {
-    Route::get('/', 'index');
-    Route::get('/setting', 'create');
+Route::controller(GameController::class)->prefix('games')->name('games.')->group(function (): void {
+    Route::get('/', 'index'); // GameList
+    Route::get('/setting', 'create'); // GameSetting
 });
 
 Route::controller(BingoController::class)->prefix('bingo')->name('bingo.')->group(function (): void {
-    Route::get('/', 'index');
+    Route::get('/', 'index'); // StartPage
+    Route::get('/game', 'show'); // Bingo
 });
 
 Route::controller(PrizeController::class)->prefix('prize')->name('prize.')->group(function (): void {
-    Route::get('/', 'index');
+    Route::get('/', 'index'); // PrizeList
 });
