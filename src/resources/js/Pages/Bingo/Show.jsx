@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NumberBox from "../../component/ForBingoGame/NumberBox";
 import SelectedNumber from "../../component/ForBingoGame/SelectedNumber";
+import RandomNumber from "../../component/ForBingoGame/RandomNumber";
 
 const MAX_NUMBER = 75;
 const GRID = 15;
@@ -12,6 +13,8 @@ const Show = () => {
     // 指定数の配列を作成
     const numbers = Array.from({ length: MAX_NUMBER }, (_, index) => index + 1);
     const [originalNumbers, setOriginalNumber] = useState(numbers);
+
+    const [isSelecting, setIsSelecting] = useState(false);
 
     const chunkArray = (array, size) => {
         return Array.from(
@@ -27,14 +30,18 @@ const Show = () => {
 
     const pickRandomNumber = () => {
         if (originalNumbers.length > 0) {
+            setIsSelecting(true);
             const selectIndex = Math.floor(
                 Math.random() * originalNumbers.length
             );
             const selectNumber = originalNumbers.splice(selectIndex, 1)[0];
 
-            setOriginalNumber(originalNumbers); // 選ばれた数値を削除
-            setDisplayedNumber(selectNumber);
-            setSelectedNumbers([...selectedNumbers, selectNumber]);
+            setTimeout(() => {
+                setOriginalNumber(originalNumbers); // 選ばれた数値を削除
+                setDisplayedNumber(selectNumber);
+                setSelectedNumbers([...selectedNumbers, selectNumber]);
+                setIsSelecting(false);
+            }, 3000);
         } else {
             console.log("All Clear");
         }
@@ -43,7 +50,9 @@ const Show = () => {
     return (
         <>
             <button onClick={pickRandomNumber}>ボタン</button>
-            {displayedNumber && (
+            {isSelecting ? (
+                <RandomNumber />
+            ) : (
                 <SelectedNumber specifiedNumber={displayedNumber} />
             )}
             {chunkedNumbers.map((row, rowIndex) => (
