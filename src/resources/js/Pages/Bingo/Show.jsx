@@ -8,7 +8,7 @@ const GRID = 15;
 
 const Show = () => {
     const [selectedNumbers, setSelectedNumbers] = useState([]);
-    const [displayedNumber, setDisplayedNumber] = useState(null);
+    const [displayedNumber, setDisplayedNumber] = useState(0);
 
     // 指定数の配列を作成
     const numbers = Array.from({ length: MAX_NUMBER }, (_, index) => index + 1);
@@ -49,14 +49,19 @@ const Show = () => {
 
     return (
         <>
-            <button onClick={pickRandomNumber}>ボタン</button>
+            <button disabled={isSelecting} onClick={pickRandomNumber}>
+                ボタン
+            </button>
             {isSelecting ? (
                 <RandomNumber />
             ) : (
                 <SelectedNumber specifiedNumber={displayedNumber} />
             )}
             {chunkedNumbers.map((row, rowIndex) => (
-                <div key={rowIndex} style={{ display: "flex" }}>
+                <div
+                    key={rowIndex}
+                    style={{ display: "flex", justifyContent: "center" }}
+                >
                     {row.map((number) => (
                         <NumberBox
                             key={number}

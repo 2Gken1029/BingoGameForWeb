@@ -4,7 +4,7 @@ import { formatNumber } from "../util";
 
 const NumberBox = ({ number, selected }) => {
     return (
-        <div className={selected ? styles.selectedNumber : styles.container}>
+        <div className={selected ? styles.selectedNumber : styles.numberBox}>
             {formatNumber(number)}
         </div>
     );

@@ -22,8 +22,9 @@ Route::get('/', function () {
 });
 
 Route::controller(GameController::class)->prefix('games')->name('games.')->group(function (): void {
-    Route::get('/', 'index'); // GameList
+    Route::get('/', 'index')->name('index'); // GameList
     Route::get('/setting', 'create'); // GameSetting
+    Route::post('/create', 'store');
 });
 
 Route::controller(BingoController::class)->prefix('bingo')->name('bingo.')->group(function (): void {
