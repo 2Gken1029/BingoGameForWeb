@@ -34,9 +34,8 @@ class Game extends Model
     /**
      * ゲーム情報の登録
      * 
-     * @param $village_data ヴィレッジの基本情報
-     * @return object ヴィレッジID
-     * @throws Exception 一般的な例外を投げる
+     * @param StoreRequest ゲーム情報
+     * @return int ゲームID
      */
     public function store($data)
     {
@@ -47,9 +46,6 @@ class Game extends Model
         ];
 
         $result = self::create($param);
-
-        return [
-            'id' => $result->id,
-        ];
+        return $result->id;
     }
 }

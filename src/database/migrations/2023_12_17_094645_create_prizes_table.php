@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('prizes', function (Blueprint $table) {
             $table->comment('景品情報');
             $table->id();
-            $table->string('name', 191)->comment("景品名");
             $table->bigInteger('game_id')->comment("ゲームID");
+            $table->integer('prize_number')->comment("景品順位");
+            $table->string('name', 191)->comment("景品名");
             $table->text('other', 1024)->nullable()->comment("備考");
             $table->timestamps();
             $table->softDeletes();

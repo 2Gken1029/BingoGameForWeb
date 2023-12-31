@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Game\StoreRequest;
 use App\Models\Game;
+use App\Models\Prize;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class GameController extends Controller
 {
     protected $game_model;
+    protected $prize_model;
 
     /**
      * __constructメソッド
@@ -21,8 +23,10 @@ class GameController extends Controller
      */
     public function __construct(
         Game $game_model,
+        Prize $prize_model,
     ) {
         $this->game_model = $game_model;
+        $this->prize_model = $prize_model;
     }
 
 
@@ -41,7 +45,12 @@ class GameController extends Controller
         try {
             DB::beginTransaction();
 
-            $this->game_model->store($request);
+            $game_id = $this->game_model->store($request);
+
+            if (strlen($request->prizes) > 0) {
+                $prize_list = explode("\n", $request->prizes);
+                $this->prize_model->store($game_id, $prize_list);
+            }
 
             DB::commit();
             session()->flash('flash.success', 'ゲーム情報を追加しました');

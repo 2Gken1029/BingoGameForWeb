@@ -23,4 +23,22 @@ class Prize extends Model
     {
         return $this->belongsTo(Game::class);
     }
+
+    /**
+     * ゲームIDに基づいて景品情報を登録する
+     * 
+     * @param int ゲームID
+     * @param array 景品リスト
+     */
+    public function store($id, $prize_list)
+    {
+        foreach ($prize_list as $index => $prize) {
+            $param = [
+                'game_id' => $id,
+                'prize_number' => $index + 1,
+                'name' => $prize
+            ];
+            self::create($param);
+        }
+    }
 }
