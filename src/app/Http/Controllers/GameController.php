@@ -15,11 +15,6 @@ class GameController extends Controller
 
     /**
      * __constructメソッド
-     *
-     * Villageオブジェクトを使用して、新しいインスタンスを作成する。
-     *
-     * @param Village　$village_model ヴィレッジテーブル
-     * @throws Exception 一般的な例外を投げる
      */
     public function __construct(
         Game $game_model,
@@ -32,7 +27,11 @@ class GameController extends Controller
 
     public function index()
     {
-        return Inertia::render('GameList/Index');
+        $pagination_data = $this->game_model->getGameList();
+
+        return Inertia::render('GameList/Index', [
+            'game_list' => $pagination_data
+        ]);
     }
 
     public function create()

@@ -48,4 +48,16 @@ class Game extends Model
         $result = self::create($param);
         return $result->id;
     }
+
+    /**
+     * 
+     * 
+     * 
+     */
+    public function getGameList()
+    {
+        $query = self::select('id', 'name', 'implementation_date');
+
+        return $query->paginate(15);
+    }
 }

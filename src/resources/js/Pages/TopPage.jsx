@@ -36,11 +36,11 @@ const TopPage = () => {
                 text="GameSetting"
                 onClick={transitionGameSetting}
             />
-            <Button
+            {/* <Button
                 size="medium"
                 text="BingoIndex"
                 onClick={transitionBingoIndex}
-            />
+            /> */}
             <Button
                 size="medium"
                 text="BingoGame"
