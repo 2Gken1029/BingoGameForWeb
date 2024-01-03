@@ -2,28 +2,27 @@ import React from "react";
 import { router, usePage } from "@inertiajs/react";
 import styles from "../../../css/Table.module.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import Button from "../Button";
 
-const GameList = () => {
-    const { game_list: gameList } = usePage().props;
-    const tableData = gameList.data;
-    const totalPage = gameList.last_page;
-    const currentPage = gameList.current_page;
+const PrizeList = () => {
+    const { prize_list: prizeList, game_id: gameId } = usePage().props;
+    const tableData = prizeList.data;
+    const totalPage = prizeList.last_page;
+    const currentPage = prizeList.current_page;
 
     // ページネーションのボタンがクリックされた時の処理
     const handlePageClick = (pageNumber) => {
         const queryParams = {
+            id: gameId,
             page: pageNumber,
         };
-        router.get("games", queryParams);
+        router.get("prize", queryParams);
     };
 
     /** テーブルヘッダの作成 */
     const header = {
-        name: "大会名",
-        implementation_date: "開催予定日",
-        prize_header: "",
-        start_header: "",
+        prize_number: "景品順位",
+        name: "景品名",
+        winner: "景品獲得者",
     };
     const tableHeaders = Object.values(header).map((key) => (
         <th
@@ -69,48 +68,12 @@ const GameList = () => {
     /** テーブルデータを作成する */
     const rowData = tableData.map((item, index) => {
         const rowData = Object.keys(header).map((key) => {
+            console.log(item[key]);
             let value = item[key];
-            if (key === "prize_header") {
-                return (
-                    <td
-                        className={styles.rowButtonStyle}
-                        key={`${index}-${key}`}
-                    >
-                        <Button
-                            height={40}
-                            width={100}
-                            text="景品情報"
-                            backgroundColor={"yellow"}
-                            onClick={() => {
-                                const queryParams = {
-                                    id: item.id,
-                                };
-                                router.get("prize", queryParams);
-                            }}
-                        />
-                    </td>
-                );
-            } else if (key === "start_header") {
-                return (
-                    <td
-                        className={styles.rowButtonStyle}
-                        key={`${index}-${key}`}
-                    >
-                        <Button
-                            height={40}
-                            width={120}
-                            text="ゲームスタート"
-                            backgroundColor={"skyblue"}
-                            onClick={() => {
-                                const queryParams = {
-                                    id: item.id,
-                                };
-                                router.get("bingo/game", queryParams);
-                            }}
-                        />
-                    </td>
-                );
+            if (key === "winner" && value === null) {
+                value = "獲得者無し";
             }
+
             return (
                 <td className={styles.rowCellStyle} key={`${index}-${key}`}>
                     {value}
@@ -136,4 +99,4 @@ const GameList = () => {
     );
 };
 
-export default GameList;
+export default PrizeList;

@@ -25,6 +25,17 @@ class Prize extends Model
     }
 
     /**
+     * 指定した条件に基づくデータを取得する
+     * 
+     * @param array 指定条件
+     * @return collection 検索結果
+     */
+    public function getData($condition)
+    {
+        return self::where($condition)->get();
+    }
+
+    /**
      * ゲームIDに基づいて景品情報を登録する
      * 
      * @param int ゲームID
@@ -40,5 +51,20 @@ class Prize extends Model
             ];
             self::create($param);
         }
+    }
+
+    /**
+     * 指定されたゲームIDに紐づく
+     * 景品情報をページネーションで取得する
+     * 
+     * @param int ゲームID
+     * @return paginate
+     */
+    public function getPrizeList($id)
+    {
+        $query = self::where('game_id', $id)
+            ->select('id', 'prize_number', 'name', 'winner');
+
+        return $query->paginate(10);
     }
 }

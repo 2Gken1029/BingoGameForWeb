@@ -1,8 +1,15 @@
 import React from "react";
-import { router } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
+import Header from "../Header";
+import PrizeList from "../../component/ForPrizeList/Table";
 
 const Index = () => {
-    return <div>景品リスト</div>;
+    return (
+        <>
+            <Header />
+            <PrizeList />
+        </>
+    );
 };
 
 export default Index;

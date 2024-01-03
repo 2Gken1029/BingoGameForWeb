@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { usePage } from "@inertiajs/react";
+import styles from "../../../css/Bingo/Show.module.css";
 import NumberBox from "../../component/ForBingoGame/NumberBox";
 import SelectedNumber from "../../component/ForBingoGame/SelectedNumber";
 import RandomNumber from "../../component/ForBingoGame/RandomNumber";
+import TextAnimation from "../../component/TextAnimation";
+import Button from "../../component/Button";
 
 const MAX_NUMBER = 75;
 const GRID = 15;
 
 const Show = () => {
+    const { prize_data: prizeData } = usePage().props;
     const [selectedNumbers, setSelectedNumbers] = useState([]);
     const [displayedNumber, setDisplayedNumber] = useState(0);
 
@@ -47,16 +52,32 @@ const Show = () => {
         }
     };
 
+    const prizeText = () => {
+        let prizeText = "";
+        prizeData.map((prize) => {
+            prizeText += prize.prize_number + "位：" + prize.name + "　";
+        });
+        return prizeText;
+    };
+
     return (
         <>
-            <button disabled={isSelecting} onClick={pickRandomNumber}>
-                ボタン
-            </button>
-            {isSelecting ? (
-                <RandomNumber />
-            ) : (
-                <SelectedNumber specifiedNumber={displayedNumber} />
-            )}
+            <div className={styles.selectNumberContainer}>
+                {isSelecting ? (
+                    <RandomNumber />
+                ) : (
+                    <SelectedNumber specifiedNumber={displayedNumber} />
+                )}
+                <Button
+                    height={40}
+                    width={200}
+                    text="スタート"
+                    backgroundColor={"skyblue"}
+                    disabled={isSelecting}
+                    disabledTime={3000}
+                    onClick={pickRandomNumber}
+                />
+            </div>
             {chunkedNumbers.map((row, rowIndex) => (
                 <div
                     key={rowIndex}
@@ -71,6 +92,9 @@ const Show = () => {
                     ))}
                 </div>
             ))}
+            <div className={styles.animationContainer}>
+                <TextAnimation animationText={prizeText()} />
+            </div>
         </>
     );
 };

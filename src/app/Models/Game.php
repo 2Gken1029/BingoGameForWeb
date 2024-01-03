@@ -50,9 +50,9 @@ class Game extends Model
     }
 
     /**
+     * ゲーム情報をページネーションで取得する
      * 
-     * 
-     * 
+     * @return paginate
      */
     public function getGameList()
     {

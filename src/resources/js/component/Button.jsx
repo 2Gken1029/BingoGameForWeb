@@ -12,6 +12,7 @@ const Button = ({
     border = "black",
     text,
     onClick,
+    disabledTime = 1000,
 }) => {
     const [disabled, setDisabled] = useState(false);
 
@@ -26,7 +27,7 @@ const Button = ({
         if (disabled) {
             const timeoutId = setTimeout(() => {
                 setDisabled(false);
-            }, 1000); // 1秒後にボタンを再有効化
+            }, disabledTime); // 1秒後にボタンを再有効化
             return () => clearTimeout(timeoutId);
         }
     }, [disabled]);

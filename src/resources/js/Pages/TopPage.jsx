@@ -41,16 +41,16 @@ const TopPage = () => {
                 text="BingoIndex"
                 onClick={transitionBingoIndex}
             /> */}
-            <Button
+            {/* <Button
                 size="medium"
                 text="BingoGame"
                 onClick={transitionBingoGame}
-            />
-            <Button
+            /> */}
+            {/* <Button
                 size="medium"
                 text="PrizeIndex"
                 onClick={transitionPrizeIndex}
-            />
+            /> */}
         </>
     );
 };

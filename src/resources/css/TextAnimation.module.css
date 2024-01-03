@@ -1,0 +1,17 @@
+.textContainer {
+    overflow: hidden;
+}
+
+.animatedText {
+    white-space: nowrap;
+    animation: slide-in 10s linear infinite;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
