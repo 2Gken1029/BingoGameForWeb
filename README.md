@@ -1,9 +1,12 @@
 # BingoGameForWeb
 
-### フロントエンド
+### フロントエンド - React(.jsx)
 
-React
+### バックエンド - Laravel(.php)
 
-### バックエンド
+## 開発環境
 
-Laravel
+- `make init`で環境構築
+- `make admin`でコンテナ立ち上げ
+- コンテナに入った状態で`npm run dev`を実行して、任意のブラウザで [localhost:8000](http://localhost:8000/) を表示
+- `make down`でコンテナを落とす
