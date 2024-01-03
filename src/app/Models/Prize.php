@@ -67,4 +67,18 @@ class Prize extends Model
 
         return $query->paginate(10);
     }
+
+    /**
+     * 景品獲得者情報を設定する
+     * 
+     * @param array 更新情報
+     * @return void
+     */
+    public function updateWinner($data)
+    {
+        self::find($data["id"])
+            ->update([
+                'winner' => $data["winner"],
+            ]);
+    }
 }

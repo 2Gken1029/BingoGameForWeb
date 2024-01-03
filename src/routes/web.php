@@ -34,4 +34,5 @@ Route::controller(BingoController::class)->prefix('bingo')->name('bingo.')->grou
 
 Route::controller(PrizeController::class)->prefix('prize')->name('prize.')->group(function (): void {
     Route::get('/', 'index'); // PrizeList
+    Route::put('/winner-setting', 'update');
 });

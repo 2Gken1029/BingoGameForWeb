@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
 import styles from "../../../css/Table.module.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Button from "../Button";
 
 const PrizeList = () => {
     const { prize_list: prizeList, game_id: gameId } = usePage().props;
     const tableData = prizeList.data;
     const totalPage = prizeList.last_page;
     const currentPage = prizeList.current_page;
+
+    const [winnerData, setWinnerData] = useState(tableData);
+
+    const handleSaveClick = () => {
+        router.put("prize/winner-setting", winnerData);
+    };
 
     // ページネーションのボタンがクリックされた時の処理
     const handlePageClick = (pageNumber) => {
@@ -65,13 +72,28 @@ const PrizeList = () => {
         );
     }
 
+    const handleWinnerChange = (index, newValue) => {
+        const updatedTableData = [...tableData];
+        winnerData[index]["winner"] = newValue;
+        setWinnerData(updatedTableData);
+    };
+
     /** テーブルデータを作成する */
     const rowData = tableData.map((item, index) => {
         const rowData = Object.keys(header).map((key) => {
-            console.log(item[key]);
             let value = item[key];
-            if (key === "winner" && value === null) {
-                value = "獲得者無し";
+            if (key === "winner") {
+                return (
+                    <td className={styles.rowCellStyle} key={`${index}-${key}`}>
+                        <input
+                            type="text"
+                            value={value}
+                            onChange={(e) =>
+                                handleWinnerChange(index, e.target.value)
+                            }
+                        />
+                    </td>
+                );
             }
 
             return (
@@ -86,6 +108,15 @@ const PrizeList = () => {
 
     return (
         <>
+            <Button
+                height={40}
+                width={100}
+                text="保存"
+                backgroundColor={"blue"}
+                // disabled={isSelecting}
+                // disabledTime={3000}
+                onClick={handleSaveClick}
+            />
             <div className={styles.container}>
                 <table className={styles.table}>
                     <thead className={styles.rowHeaderStyle}>
