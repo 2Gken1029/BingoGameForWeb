@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-12-17T09:55:58.805Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="5Rhkx9PaAaIxNc8zKQP-" version="22.0.2" type="device">
+<mxfile host="Electron" modified="2023-12-31T08:03:06.818Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="Y4_cYQv5j8nS8zZGijvG" version="22.0.2" type="device">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="775" dy="743" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -28,7 +28,7 @@
             <mxRectangle width="30" height="110" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="C-vyLk0tnHw3VtMMgP7b-8" value="game_id BigInteger NOT NULL ゲームID&#xa;name varchar(191) NOT NULL 景品名&#xa;other text(1024) 備考&#xa;created_at timestamp 作成日時&#xa;updated_at timestamp 更新日時&#xa;deleted_at timestamp　削除日時&#xa;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;verticalAlign=top;" parent="C-vyLk0tnHw3VtMMgP7b-6" vertex="1">
+        <mxCell id="C-vyLk0tnHw3VtMMgP7b-8" value="game_id BigInteger NOT NULL ゲームID&#xa;prize_number Integer NOT NULL 景品順位&#xa;name varchar(191) NOT NULL 景品名&#xa;other text(1024) 備考&#xa;created_at timestamp 作成日時&#xa;updated_at timestamp 更新日時&#xa;deleted_at timestamp　削除日時&#xa;" style="shape=partialRectangle;overflow=hidden;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;verticalAlign=top;" parent="C-vyLk0tnHw3VtMMgP7b-6" vertex="1">
           <mxGeometry x="30" width="260" height="110" as="geometry">
             <mxRectangle width="260" height="110" as="alternateBounds" />
           </mxGeometry>
