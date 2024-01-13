@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../component/Button";
 import { router } from "@inertiajs/react";
+import styles from "../../css/TopPage.module.css";
 
 const TopPage = () => {
     const [disabled, setDisabled] = useState(false);
@@ -15,51 +16,24 @@ const TopPage = () => {
         router.get("/games/setting"); // GameSetting
     };
 
-    const transitionBingoIndex = () => {
-        router.get("/bingo"); // StartPage
-    };
-
-    const transitionBingoGame = () => {
-        router.get("/bingo/game"); // Bingo
-    };
-
-    const transitionPrizeIndex = () => {
-        router.get("/prize"); // PrizeList
-    };
-
     return (
-        <>
-            <div>トップページ</div>
+        <div className={styles.container}>
+            <div>アイコン</div>
             <Button
-                size="medium"
-                text="GameList"
+                size="large"
+                text="ゲーム一覧"
                 textColor={"white"}
                 disabled={disabled}
                 onClick={transitionGameIndex}
             />
             <Button
-                size="medium"
-                text="GameSetting"
+                size="large"
+                text="新規作成"
                 textColor={"white"}
                 disabled={disabled}
                 onClick={transitionGameSetting}
             />
-            {/* <Button
-                size="medium"
-                text="BingoIndex"
-                onClick={transitionBingoIndex}
-            /> */}
-            {/* <Button
-                size="medium"
-                text="BingoGame"
-                onClick={transitionBingoGame}
-            /> */}
-            {/* <Button
-                size="medium"
-                text="PrizeIndex"
-                onClick={transitionPrizeIndex}
-            /> */}
-        </>
+        </div>
     );
 };
 

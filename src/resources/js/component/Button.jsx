@@ -15,11 +15,11 @@ const Button = ({
     const getSizeStyle = () => {
         switch (size) {
             case "small":
-                return { fontSize: "0.8rem" };
+                return { fontSize: "1.0rem", height: "30px", width: "80px" };
             case "medium":
-                return { fontSize: "1rem" };
+                return { fontSize: "1.5rem", height: "50px", width: "140px" };
             case "large":
-                return { fontSize: "1.2rem" };
+                return { fontSize: "2.0rem", height: "70px", width: "200px" };
             default:
                 return {};
         }
