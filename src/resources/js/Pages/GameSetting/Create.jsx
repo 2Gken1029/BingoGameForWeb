@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Label from "../../component/Label";
 import styles from "../../../css/GameSetting/Create.module.css";
 import Header from "../Header";
+import Button from "../../component/Button";
 
 const PLACEHOLDER_TEXT = `1位の景品\n2位の景品\n3位の景品\n　・　\n　・　\n　・　\n`;
 
@@ -14,6 +15,7 @@ const Create = () => {
     // バリデーションエラーを管理する定数
     const { errors: validError } = usePage().props;
     const onSubmit = (data) => {
+        console.log(data);
         if (isSubmitting) {
             return; // 既に送信中の場合は無効
         }
@@ -73,15 +75,11 @@ const Create = () => {
                         )}
                     </Label>
                     <div className={styles.buttonContainer}>
-                        <input
-                            className={
-                                isSubmitting
-                                    ? styles.submittingButton
-                                    : styles.submitButton
-                            }
+                        <Button
+                            size="medium"
+                            text="保存"
                             disabled={isSubmitting}
-                            type="submit"
-                            value={"保存"}
+                            onClick={onSubmit}
                         />
                     </div>
                 </form>

@@ -1,37 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 /**
  * ボタン共通コンポーネント
  * <Button size="medium" text="Medium Medium" onClick={handleClick} />
  */
 const Button = ({
-    size = "",
-    width,
-    height,
-    backgroundColor,
-    border = "black",
+    size = "medium",
+    disabled,
+    backgroundColor = "D9D9D9",
     text,
     onClick,
-    disabledTime = 1000,
 }) => {
-    const [disabled, setDisabled] = useState(false);
-
-    const handleClick = () => {
-        if (!disabled) {
-            setDisabled(true);
-            onClick();
-        }
-    };
-
-    useEffect(() => {
-        if (disabled) {
-            const timeoutId = setTimeout(() => {
-                setDisabled(false);
-            }, disabledTime); // 1秒後にボタンを再有効化
-            return () => clearTimeout(timeoutId);
-        }
-    }, [disabled]);
-
     const getSizeStyle = () => {
         switch (size) {
             case "small":
@@ -42,17 +21,6 @@ const Button = ({
                 return { fontSize: "1.2rem" };
             default:
                 return {};
-        }
-    };
-
-    const setWidthAndHeight = () => {
-        if (width && height) {
-            return {
-                width: width,
-                height: height,
-            };
-        } else {
-            return {};
         }
     };
 
@@ -93,16 +61,14 @@ const Button = ({
         <button
             style={{
                 ...getSizeStyle(),
-                ...setWidthAndHeight(),
                 backgroundColor: backgroundColor,
                 color: determineTextColor(),
-                borderRadius: 30,
-                borderColor: border,
+                border: "none",
                 padding: 7,
                 opacity: disabled ? 0.5 : 1, // ボタンが無効のときの透明度
                 cursor: disabled ? "not-allowed" : "pointer", // ボタンが無効のときのカーソル
             }}
-            onClick={handleClick}
+            onClick={onClick}
             disabled={disabled}
         >
             {text}

@@ -69,12 +69,9 @@ const Show = () => {
                     <SelectedNumber specifiedNumber={displayedNumber} />
                 )}
                 <Button
-                    height={40}
-                    width={200}
+                    size="medium"
                     text="スタート"
-                    backgroundColor={"skyblue"}
                     disabled={isSelecting}
-                    disabledTime={3000}
                     onClick={pickRandomNumber}
                 />
             </div>

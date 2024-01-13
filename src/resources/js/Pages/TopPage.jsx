@@ -1,39 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../component/Button";
 import { router } from "@inertiajs/react";
 
-const transitionGameIndex = () => {
-    router.get("/games"); // GameList
-};
-
-const transitionGameSetting = () => {
-    router.get("/games/setting"); // GameSetting
-};
-
-const transitionBingoIndex = () => {
-    router.get("/bingo"); // StartPage
-};
-
-const transitionBingoGame = () => {
-    router.get("/bingo/game"); // Bingo
-};
-
-const transitionPrizeIndex = () => {
-    router.get("/prize"); // PrizeList
-};
-
 const TopPage = () => {
+    const [disabled, setDisabled] = useState(false);
+
+    const transitionGameIndex = () => {
+        setDisabled(true);
+        router.get("/games"); // GameList
+    };
+
+    const transitionGameSetting = () => {
+        setDisabled(true);
+        router.get("/games/setting"); // GameSetting
+    };
+
+    const transitionBingoIndex = () => {
+        router.get("/bingo"); // StartPage
+    };
+
+    const transitionBingoGame = () => {
+        router.get("/bingo/game"); // Bingo
+    };
+
+    const transitionPrizeIndex = () => {
+        router.get("/prize"); // PrizeList
+    };
+
     return (
         <>
             <div>トップページ</div>
             <Button
                 size="medium"
                 text="GameList"
+                disabled={disabled}
                 onClick={transitionGameIndex}
             />
             <Button
                 size="medium"
                 text="GameSetting"
+                disabled={disabled}
                 onClick={transitionGameSetting}
             />
             {/* <Button

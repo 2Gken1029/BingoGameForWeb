@@ -108,15 +108,7 @@ const PrizeList = () => {
 
     return (
         <>
-            <Button
-                height={40}
-                width={100}
-                text="保存"
-                backgroundColor={"blue"}
-                // disabled={isSelecting}
-                // disabledTime={3000}
-                onClick={handleSaveClick}
-            />
+            <Button text="保存" onClick={handleSaveClick} />
             <div className={styles.container}>
                 <table className={styles.table}>
                     <thead className={styles.rowHeaderStyle}>
