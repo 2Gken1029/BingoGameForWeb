@@ -33,12 +33,14 @@ const TopPage = () => {
             <Button
                 size="medium"
                 text="GameList"
+                textColor={"white"}
                 disabled={disabled}
                 onClick={transitionGameIndex}
             />
             <Button
                 size="medium"
                 text="GameSetting"
+                textColor={"white"}
                 disabled={disabled}
                 onClick={transitionGameSetting}
             />

@@ -2,12 +2,13 @@ import React from "react";
 
 /**
  * ボタン共通コンポーネント
- * <Button size="medium" text="Medium Medium" onClick={handleClick} />
+ * <Button size="medium" text="Medium Medium" onClick={() => { void() }} />
  */
 const Button = ({
     size = "medium",
     disabled,
-    backgroundColor = "D9D9D9",
+    backgroundColor = "darkgray",
+    textColor,
     text,
     onClick,
 }) => {
@@ -62,8 +63,9 @@ const Button = ({
             style={{
                 ...getSizeStyle(),
                 backgroundColor: backgroundColor,
-                color: determineTextColor(),
+                color: textColor ? textColor : determineTextColor(),
                 border: "none",
+                fontWeight: "bold",
                 padding: 7,
                 opacity: disabled ? 0.5 : 1, // ボタンが無効のときの透明度
                 cursor: disabled ? "not-allowed" : "pointer", // ボタンが無効のときのカーソル
