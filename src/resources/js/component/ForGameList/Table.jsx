@@ -77,10 +77,8 @@ const GameList = () => {
                         key={`${index}-${key}`}
                     >
                         <Button
-                            height={40}
-                            width={100}
+                            size={"small"}
                             text="景品情報"
-                            backgroundColor={"yellow"}
                             onClick={() => {
                                 const queryParams = {
                                     id: item.id,
@@ -97,10 +95,8 @@ const GameList = () => {
                         key={`${index}-${key}`}
                     >
                         <Button
-                            height={40}
-                            width={120}
+                            size={"small"}
                             text="ゲームスタート"
-                            backgroundColor={"skyblue"}
                             onClick={() => {
                                 const queryParams = {
                                     id: item.id,
