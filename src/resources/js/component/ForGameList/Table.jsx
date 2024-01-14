@@ -96,7 +96,7 @@ const GameList = () => {
                     >
                         <Button
                             size={"small"}
-                            text="ゲームスタート"
+                            text="スタート"
                             onClick={() => {
                                 const queryParams = {
                                     id: item.id,
