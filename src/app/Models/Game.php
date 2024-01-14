@@ -42,7 +42,6 @@ class Game extends Model
         $param = [
             'name' => $data->name,
             'implementation_date' => $data->implementation_date,
-
         ];
 
         $result = self::create($param);

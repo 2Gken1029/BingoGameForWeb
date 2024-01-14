@@ -18,7 +18,7 @@ class PrizeControllerTest extends TestCase
     }
 
     /**
-     * indexレスポンステスト
+     * indexレスポンス正常テスト
      */
     public function test_index(): void
     {

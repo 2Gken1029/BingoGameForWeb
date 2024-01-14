@@ -9,7 +9,7 @@ use Tests\TestCase;
 class BingoControllerTest extends TestCase
 {
     /**
-     * A basic feature test example.
+     * indexレスポンス正常テスト
      */
     public function test_index(): void
     {
