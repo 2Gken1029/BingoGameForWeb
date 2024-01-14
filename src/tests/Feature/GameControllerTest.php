@@ -38,16 +38,16 @@ class GameControllerTest extends TestCase
     }
 
     /**
-     * storeレスポンス正常テスト
+     * storeレスポンス正常テスト（画面リダイレクト）
      */
     public function test_store(): void
     {
         $response = $this->json('POST', '/games/create', [
             'name' => 'テスト用大会',
-            'implementation_date' => now(),
+            'implementation_date' => now()->format('Y-m-d'),
             'prizes' => "景品1\n景品2\n景品3\n景品4\n景品5"
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 }
