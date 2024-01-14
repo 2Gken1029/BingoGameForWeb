@@ -15,6 +15,21 @@ services:
     networks:
       - bingogame-net
 
+  testdb:
+    image: mysql:8.0
+    ports:
+      - "3310:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: bingogame-db-test
+    volumes:
+      - ./docker/mysql-test/data:/var/lib/mysql
+      - ./docker/mysql-test/initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - bingogame-net
+
   admin-php:
     build: ./docker/php
     ports:

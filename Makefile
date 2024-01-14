@@ -22,3 +22,6 @@ admin:
 
 build:
 	docker compose exec admin-php npm run build
+
+test: 
+	docker compose exec admin-php composer test
