@@ -6,6 +6,7 @@ import SelectedNumber from "../../component/ForBingoGame/SelectedNumber";
 import RandomNumber from "../../component/ForBingoGame/RandomNumber";
 import TextAnimation from "../../component/TextAnimation";
 import Button from "../../component/Button";
+import Header from "../Header";
 
 const MAX_NUMBER = 75;
 const GRID = 15;
@@ -62,6 +63,7 @@ const Show = () => {
 
     return (
         <>
+            <Header currentPath="ゲーム" isGame={true} />
             <div className={styles.selectNumberContainer}>
                 {isSelecting ? (
                     <RandomNumber />
