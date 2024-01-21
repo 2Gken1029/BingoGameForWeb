@@ -6,7 +6,7 @@ import PrizeList from "../../component/ForPrizeList/Table";
 const Index = () => {
     return (
         <>
-            <Header />
+            <Header currentPath="景品情報" isGame={true} />
             <PrizeList />
         </>
     );

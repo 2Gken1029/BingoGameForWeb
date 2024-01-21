@@ -36,7 +36,7 @@ const Create = () => {
 
     return (
         <>
-            <Header />
+            <Header currentPath="新規登録" />
             <div className={styles.container}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Label name={"大会名"}>

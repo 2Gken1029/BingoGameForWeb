@@ -1,5 +1,37 @@
 .container {
+    display: flex;
+    align-items: center;
     height: 75px;
     width: 100%;
-    background-color: greenyellow;
+    background-color: darkgray; /* Todo: 色を変える */
+}
+
+.appIcon {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.pathContainer {
+    display: flex;
+    font-size: 25px;
+    margin-left: 30px;
+}
+
+.iconsContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.iconLeftBar {
+    margin: 10px;
+    border-left: 3px solid white;
+}
+
+.icon {
+    margin-left: 15px;
+    cursor: pointer;
 }
