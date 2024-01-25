@@ -12,15 +12,30 @@
 }
 
 .dateInput {
-    height: 30px;
+    height: 50px;
+    width: 30%;
+}
+
+.prizeRank {
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .prizeInput {
-    width: 100%;
-    height: 200px;
+    width: 40%;
     font-size: 20px;
     padding: 5px;
-    border-radius: 10px;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-left: 3vw;
+}
+
+.prizeInput:focus {
+    outline: none;
+}
+
+.plusButton {
+    margin-left: 18vw;
 }
 
 .errorMessage {
