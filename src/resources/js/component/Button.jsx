@@ -6,11 +6,12 @@ import React from "react";
  */
 const Button = ({
     size = "medium",
+    type = "button",
     disabled,
     backgroundColor = "darkgray",
     textColor,
     text,
-    onClick,
+    onClick = () => {},
 }) => {
     const getSizeStyle = () => {
         switch (size) {
@@ -70,6 +71,7 @@ const Button = ({
                 opacity: disabled ? 0.5 : 1, // ボタンが無効のときの透明度
                 cursor: disabled ? "not-allowed" : "pointer", // ボタンが無効のときのカーソル
             }}
+            type={type}
             onClick={onClick}
             disabled={disabled}
         >

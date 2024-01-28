@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { usePage } from "@inertiajs/react";
+import { useForm } from "react-hook-form";
 import styles from "../../../css/Bingo/Show.module.css";
 import NumberBox from "../../component/ForBingoGame/NumberBox";
 import SelectedNumber from "../../component/ForBingoGame/SelectedNumber";
 import RandomNumber from "../../component/ForBingoGame/RandomNumber";
-import TextAnimation from "../../component/TextAnimation";
 import Button from "../../component/Button";
 import Header from "../Header";
+import SideBar from "../../component/ForBingoGame/SideBar";
 
 const MAX_NUMBER = 75;
 const GRID = 15;
 
 const Show = () => {
-    const { prize_data: prizeData } = usePage().props;
+    const { control, setValue, getValues } = useForm({
+        defaultValues: {
+            winner: [], // 初期値として空の配列を設定
+        },
+    });
     const [selectedNumbers, setSelectedNumbers] = useState([]);
     const [displayedNumber, setDisplayedNumber] = useState(0);
 
@@ -53,46 +57,75 @@ const Show = () => {
         }
     };
 
-    const prizeText = () => {
-        let prizeText = "";
-        prizeData.map((prize) => {
-            prizeText += prize.prize_number + "位：" + prize.name + "　";
-        });
-        return prizeText;
+    const handleSuspend = () => {
+        console.log(getValues("winner"));
+    };
+
+    const handleComplete = () => {
+        console.log(getValues("winner"));
     };
 
     return (
         <>
             <Header currentPath="ゲーム" isGame={true} />
-            <div className={styles.selectNumberContainer}>
-                {isSelecting ? (
-                    <RandomNumber />
-                ) : (
-                    <SelectedNumber specifiedNumber={displayedNumber} />
-                )}
-                <Button
-                    size="medium"
-                    text="スタート"
-                    disabled={isSelecting}
-                    onClick={pickRandomNumber}
-                />
-            </div>
-            {chunkedNumbers.map((row, rowIndex) => (
-                <div
-                    key={rowIndex}
-                    style={{ display: "flex", justifyContent: "center" }}
-                >
-                    {row.map((number) => (
-                        <NumberBox
-                            key={number}
-                            number={number}
-                            selected={selectedNumbers.includes(number)}
-                        />
-                    ))}
-                </div>
-            ))}
-            <div className={styles.animationContainer}>
-                <TextAnimation animationText={prizeText()} />
+            <div>
+                <form>
+                    <SideBar control={control} setValue={setValue} />
+                    <div className={styles.center}>
+                        <div className={styles.selectNumberContainer}>
+                            {isSelecting ? (
+                                <RandomNumber />
+                            ) : (
+                                <SelectedNumber
+                                    specifiedNumber={displayedNumber}
+                                />
+                            )}
+                            <Button
+                                size="medium"
+                                text="スタート"
+                                disabled={isSelecting}
+                                onClick={pickRandomNumber}
+                            />
+                        </div>
+                        <div>
+                            {chunkedNumbers.map((row, rowIndex) => (
+                                <div
+                                    key={rowIndex}
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    {row.map((number) => (
+                                        <NumberBox
+                                            key={number}
+                                            number={number}
+                                            selected={selectedNumbers.includes(
+                                                number
+                                            )}
+                                        />
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className={styles.parentContainer}>
+                        <div className={styles.buttonsContainer}>
+                            <Button
+                                type="button"
+                                size="large"
+                                text="中断する"
+                                onClick={handleSuspend}
+                            />
+                            <Button
+                                type="button"
+                                size="large"
+                                text="完了する"
+                                onClick={handleComplete}
+                            />
+                        </div>
+                    </div>
+                </form>
             </div>
         </>
     );
