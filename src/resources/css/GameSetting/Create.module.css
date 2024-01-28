@@ -16,9 +16,15 @@
     width: 30%;
 }
 
+.prizeContainer {
+    display: flex;
+    align-items: center;
+}
+
 .prizeRank {
     font-weight: bold;
     font-size: 24px;
+    width: 8vw;
 }
 
 .prizeInput {
@@ -27,7 +33,6 @@
     padding: 5px;
     border: none;
     border-bottom: 1px solid black;
-    margin-left: 3vw;
 }
 
 .prizeInput:focus {
@@ -45,6 +50,9 @@
 .buttonContainer {
     display: flex;
     justify-content: flex-end;
+    position: fixed;
+    bottom: 5vw;
+    right: 6vw;
 }
 
 .submitButton {

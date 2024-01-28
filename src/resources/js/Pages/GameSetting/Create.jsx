@@ -78,21 +78,20 @@ const Create = () => {
                     </Label>
                     <Label name={"景品情報"}>
                         {fields.map((field, index) => (
-                            <div key={field.id}>
-                                <p className={styles.prizeRank}>{` ${index + 1}位`}
-                                    <input
-                                        key={field.id}
-                                        placeholder={` ${index + 1}位の景品`}
-                                        className={styles.prizeInput}
-                                        {...register(`prizes.${index}.name`)}
-                                    />
+                            <div key={field.id} className={styles.prizeContainer}>
+                            <p className={styles.prizeRank}>{` ${index + 1}位`}</p>
+                            <input
+                                key={field.id}
+                                placeholder={` ${index + 1}位の景品`}
+                                className={styles.prizeInput}
+                                {...register(`prizes.${index}.name`)}
+                            />
+                            {validError && validError[`prizes.${index}.name`] && (
+                                <p className={styles.errorMessage}>
+                                    {validError[`prizes.${index}.name`]}!
                                 </p>
-                                {validError && validError[`prizes.${index}.name`] && (
-                                    <p className={styles.errorMessage}>
-                                        {validError[`prizes.${index}.name`]}!
-                                    </p>
-                                )}
-                            </div>
+                            )}
+                        </div>
                         ))}
                     </Label>
                     <div className = {styles.plusButton}>
