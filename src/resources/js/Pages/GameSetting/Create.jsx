@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import Label from "../../component/Label";
 import styles from "../../../css/GameSetting/Create.module.css";
 import Header from "../Header";
 import Button from "../../component/Button";
 
-const PLACEHOLDER_TEXT = `1位の景品\n2位の景品\n3位の景品\n　・　\n　・　\n　・　\n`;
-
 const Create = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, control } = useForm({
+        defaultValues: {
+            prizes: [{ name: "" }],
+        },
+    });
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    //景品情報フィールドの定義
+    const { fields, append } = useFieldArray({
+        name: "prizes",
+        control,
+    });
+
+    // 新しい景品情報フォームを追加
+    const plusButtonClick = (e) => {
+        e.preventDefault();
+        append();
+    };
 
     // バリデーションエラーを管理する定数
     const { errors: validError } = usePage().props;
@@ -63,17 +77,32 @@ const Create = () => {
                         )}
                     </Label>
                     <Label name={"景品情報"}>
-                        <textarea
-                            placeholder={PLACEHOLDER_TEXT}
-                            className={styles.prizeInput}
-                            {...register("prizes")}
-                        />
-                        {validError && (
-                            <p className={styles.errorMessage}>
-                                {validError.prizes}
-                            </p>
-                        )}
+                        {fields.map((field, index) => (
+                            <div key={field.id} className={styles.prizeContainer}>
+                            <p className={styles.prizeRank}>{` ${index + 1}位`}</p>
+                            <input
+                                key={field.id}
+                                placeholder={` ${index + 1}位の景品`}
+                                className={styles.prizeInput}
+                                {...register(`prizes.${index}.name`)}
+                            />
+                            {validError && validError[`prizes.${index}.name`] && (
+                                <p className={styles.errorMessage}>
+                                    {validError[`prizes.${index}.name`]}!
+                                </p>
+                            )}
+                        </div>
+                        ))}
                     </Label>
+                    <div className = {styles.plusButton}>
+                        <Button
+                            size="medium"
+                            backgroundColor="white"
+                            text="+"
+                            type = "button"
+                            onClick={plusButtonClick}
+                        />
+                    </div>
                     <div className={styles.buttonContainer}>
                         <Button
                             size="medium"
