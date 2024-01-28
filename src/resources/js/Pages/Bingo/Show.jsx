@@ -8,7 +8,7 @@ import Button from "../../component/Button";
 import Header from "../Header";
 import SideBar from "../../component/ForBingoGame/SideBar";
 
-const MAX_NUMBER = 75;
+const MAX_NUMBER = 75; // ビンゴの最大数値
 const GRID = 15;
 
 const Show = () => {
