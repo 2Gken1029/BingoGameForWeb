@@ -15,6 +15,7 @@
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/inertia-react": "^0.8.1",
         "@inertiajs/react": "^1.0.14",
+        "datatables.net-dt": "^1.13.10",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.49.2",
