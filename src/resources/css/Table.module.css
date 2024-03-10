@@ -36,15 +36,54 @@
 .customHeader {
     padding: 8px 16px;
     border-bottom: 2px solid black;
+    text-align: center;
 }
 
 .rowCellStyle {
+    text-align: center;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    max-width: 140px;
+    padding-left: 16px;
+}
+
+.rowStatusStyle {
+    text-align: center;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    width: 200px;
+    padding-left: 16px;
+}
+
+.rowNumberStyle {
+    text-align: center;
+    border-bottom: 1px solid rgb(200, 200, 200);
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    max-width: 140px;
+    padding-left: 16px;
+}
+
+.rowInputStyle {
+    text-align: center;
     border-bottom: 1px solid rgb(200, 200, 200);
     font-size: 15px;
     height: 50px;
-    max-width: 140px;
     word-wrap: break-word;
     padding-left: 16px;
+}
+
+.rowIconCellStyle {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(200, 200, 200);
 }
 
 .rowButtonStyle {
@@ -53,11 +92,6 @@
     padding: 10px;
     text-align: center;
     width: 120px;
-}
-
-.headerFont {
-    font-weight: normal;
-    font-size: 16px;
 }
 
 .paginationButtons {

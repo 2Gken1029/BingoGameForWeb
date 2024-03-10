@@ -20,16 +20,15 @@ const GameList = () => {
 
     /** テーブルヘッダの作成 */
     const header = {
+        status: "ステータス",
         name: "大会名",
         implementation_date: "開催予定日",
+        game_header: "",
         prize_header: "",
         start_header: "",
     };
     const tableHeaders = Object.values(header).map((key) => (
-        <th
-            className={`${styles.headerFront} ${styles.customHeader}`}
-            key={key}
-        >
+        <th className={styles.customHeader} key={key}>
             {key}
         </th>
     ));
@@ -66,11 +65,50 @@ const GameList = () => {
         );
     }
 
+    const statusFormat = (status) => {
+        if (status === 0) {
+            return "未実施";
+        } else if (status === 1) {
+            return "開催済み";
+        } else if (status === 2) {
+            return "中断";
+        } else {
+            return "不正な値";
+        }
+    };
+
     /** テーブルデータを作成する */
     const rowData = tableData.map((item, index) => {
         const rowData = Object.keys(header).map((key) => {
             let value = item[key];
-            if (key === "prize_header") {
+            if (key === "status") {
+                return (
+                    <td
+                        className={styles.rowStatusStyle}
+                        key={`${index}-${key}`}
+                    >
+                        {statusFormat(value)}
+                    </td>
+                );
+            } else if (key === "game_header") {
+                return (
+                    <td
+                        className={styles.rowButtonStyle}
+                        key={`${index}-${key}`}
+                    >
+                        <Button
+                            size={"small"}
+                            text="大会情報"
+                            onClick={() => {
+                                const queryParams = {
+                                    id: item.id,
+                                };
+                                router.get("games/detail", queryParams);
+                            }}
+                        />
+                    </td>
+                );
+            } else if (key === "prize_header") {
                 return (
                     <td
                         className={styles.rowButtonStyle}
@@ -106,12 +144,13 @@ const GameList = () => {
                         />
                     </td>
                 );
+            } else {
+                return (
+                    <td className={styles.rowCellStyle} key={`${index}-${key}`}>
+                        {value}
+                    </td>
+                );
             }
-            return (
-                <td className={styles.rowCellStyle} key={`${index}-${key}`}>
-                    {value}
-                </td>
-            );
         });
 
         return <tr key={`rowData-${index}`}>{rowData}</tr>;

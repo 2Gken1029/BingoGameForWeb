@@ -22,7 +22,7 @@ const SideBar = ({ control, setValue }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {prizeData.map((item) => (
+                    {prizeData.map((item, index) => (
                         <tr key={item.id} className={styles.cellStyle}>
                             <td className={styles.prizeNumberStyle}>
                                 {item.prize_number}位
@@ -30,7 +30,7 @@ const SideBar = ({ control, setValue }) => {
                             <td>{item.name}</td>
                             <td>
                                 <Controller
-                                    name={`winner[${item.id - 1}]`}
+                                    name={`winner[${index}]`}
                                     control={control}
                                     defaultValue={item.winner || ""}
                                     render={({ field }) => (
@@ -40,7 +40,7 @@ const SideBar = ({ control, setValue }) => {
                                             type="text"
                                             onChange={(e) =>
                                                 setValue(
-                                                    `winner[${item.id - 1}]`,
+                                                    `winner[${index}]`,
                                                     e.target.value
                                                 )
                                             }

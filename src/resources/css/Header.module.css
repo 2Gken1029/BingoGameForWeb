@@ -13,6 +13,10 @@
     margin-left: 50px;
 }
 
+.logo {
+    width: 5vh;
+}
+
 .pathContainer {
     display: flex;
     font-size: 25px;

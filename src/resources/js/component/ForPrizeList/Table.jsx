@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
 import styles from "../../../css/Table.module.css";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import Button from "../Button";
+import { FaSave, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const PrizeList = () => {
     const { prize_list: prizeList, game_id: gameId } = usePage().props;
@@ -30,12 +29,10 @@ const PrizeList = () => {
         prize_number: "景品順位",
         name: "景品名",
         winner: "景品獲得者",
+        save: "更新",
     };
     const tableHeaders = Object.values(header).map((key) => (
-        <th
-            className={`${styles.headerFront} ${styles.customHeader}`}
-            key={key}
-        >
+        <th className={styles.customHeader} key={key}>
             {key}
         </th>
     ));
@@ -72,35 +69,78 @@ const PrizeList = () => {
         );
     }
 
-    const handleWinnerChange = (index, newValue) => {
+    const handleWinnerChange = (index, key, newValue) => {
         const updatedTableData = [...tableData];
-        winnerData[index]["winner"] = newValue;
+        winnerData[index][key] = newValue;
         setWinnerData(updatedTableData);
     };
 
     /** テーブルデータを作成する */
     const rowData = tableData.map((item, index) => {
+        const [saveIconVisible, setSaveIconVisible] = useState(false);
         const rowData = Object.keys(header).map((key) => {
             let value = item[key];
-            if (key === "winner") {
+            if (key === "name") {
                 return (
-                    <td className={styles.rowCellStyle} key={`${index}-${key}`}>
+                    <td
+                        className={styles.rowInputStyle}
+                        key={`${index}-${key}`}
+                    >
                         <input
+                            style={{ minWidth: "250px", height: "30px" }}
                             type="text"
-                            value={value}
-                            onChange={(e) =>
-                                handleWinnerChange(index, e.target.value)
-                            }
+                            value={value !== null ? value : ""}
+                            onChange={(e) => {
+                                handleWinnerChange(index, key, e.target.value);
+                                setSaveIconVisible(true);
+                            }}
                         />
                     </td>
                 );
+            } else if (key === "winner") {
+                return (
+                    <td
+                        className={styles.rowInputStyle}
+                        key={`${index}-${key}`}
+                    >
+                        <input
+                            style={{ minWidth: "250px", height: "30px" }}
+                            type="text"
+                            value={value !== null ? value : ""}
+                            onChange={(e) => {
+                                handleWinnerChange(index, key, e.target.value);
+                                setSaveIconVisible(true);
+                            }}
+                        />
+                    </td>
+                );
+            } else if (key === "save") {
+                return (
+                    <td
+                        className={styles.rowIconCellStyle}
+                        key={`${index}-${key}`}
+                    >
+                        {saveIconVisible ? (
+                            <FaSave
+                                size={20}
+                                style={{ cursor: "pointer" }}
+                                onClick={handleSaveClick}
+                            />
+                        ) : (
+                            <FaSave size={20} color="lightGray" />
+                        )}
+                    </td>
+                );
+            } else {
+                return (
+                    <td
+                        className={styles.rowNumberStyle}
+                        key={`${index}-${key}`}
+                    >
+                        {value}
+                    </td>
+                );
             }
-
-            return (
-                <td className={styles.rowCellStyle} key={`${index}-${key}`}>
-                    {value}
-                </td>
-            );
         });
 
         return <tr key={`rowData-${index}`}>{rowData}</tr>;
@@ -108,7 +148,6 @@ const PrizeList = () => {
 
     return (
         <>
-            <Button text="保存" onClick={handleSaveClick} />
             <div className={styles.container}>
                 <table className={styles.table}>
                     <thead className={styles.rowHeaderStyle}>

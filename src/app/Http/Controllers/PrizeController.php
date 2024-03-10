@@ -37,9 +37,14 @@ class PrizeController extends Controller
             DB::beginTransaction();
 
             foreach ($request->all() as $data) {
-                $this->prize_model->updateWinner($data);
+                $this->prize_model->updateWinner(
+                    ['id' => $data['id']],
+                    [
+                        'name' => $data['name'],
+                        'winner' => $data['winner'],
+                    ]
+                );
             }
-
             DB::commit();
             session()->flash('flash.success', '景品獲得者情報を更新しました');
         } catch (\Exception $e) {

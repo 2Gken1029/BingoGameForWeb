@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { router, usePage } from "@inertiajs/react";
 import styles from "../../../css/Bingo/Show.module.css";
 import NumberBox from "../../component/ForBingoGame/NumberBox";
 import SelectedNumber from "../../component/ForBingoGame/SelectedNumber";
@@ -12,13 +13,17 @@ const MAX_NUMBER = 75; // ビンゴの最大数値
 const GRID = 15;
 
 const Show = () => {
+    const { id: id, selected_number: selectedNumber } = usePage().props;
     const { control, setValue, getValues } = useForm({
         defaultValues: {
             winner: [], // 初期値として空の配列を設定
         },
     });
-    const [selectedNumbers, setSelectedNumbers] = useState([]);
+    const [selectedNumbers, setSelectedNumbers] = useState(
+        selectedNumber?.split(",").map(Number) ?? []
+    );
     const [displayedNumber, setDisplayedNumber] = useState(0);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     // 指定数の配列を作成
     const numbers = Array.from({ length: MAX_NUMBER }, (_, index) => index + 1);
@@ -58,11 +63,53 @@ const Show = () => {
     };
 
     const handleSuspend = () => {
-        console.log(getValues("winner"));
+        const data = {
+            game_id: id,
+            selectedNumbers: selectedNumbers,
+            winner: getValues("winner"),
+        };
+        console.log(data);
+        if (isDisabled) {
+            return; // 既に送信中の場合は無効
+        }
+
+        setIsDisabled(true);
+
+        try {
+            router.post("suspend", data);
+
+            // 一定時間は処理を受け付けないようにする
+            setTimeout(() => {
+                setIsDisabled(false);
+            }, 1000);
+        } catch (error) {
+            setIsDisabled(false);
+        }
     };
 
     const handleComplete = () => {
-        console.log(getValues("winner"));
+        const data = {
+            game_id: id,
+            selectedNumbers: selectedNumbers,
+            winner: getValues("winner"),
+        };
+        console.log(data);
+        if (isDisabled) {
+            return; // 既に送信中の場合は無効
+        }
+
+        setIsDisabled(true);
+
+        try {
+            router.post("complete", data);
+
+            // 一定時間は処理を受け付けないようにする
+            setTimeout(() => {
+                setIsDisabled(false);
+            }, 1000);
+        } catch (error) {
+            setIsDisabled(false);
+        }
     };
 
     return (
@@ -83,7 +130,7 @@ const Show = () => {
                             <Button
                                 size="medium"
                                 text="スタート"
-                                disabled={isSelecting}
+                                disabled={isSelecting || isDisabled}
                                 onClick={pickRandomNumber}
                             />
                         </div>
@@ -115,12 +162,14 @@ const Show = () => {
                                 type="button"
                                 size="large"
                                 text="中断する"
+                                disabled={isDisabled}
                                 onClick={handleSuspend}
                             />
                             <Button
                                 type="button"
                                 size="large"
                                 text="完了する"
+                                disabled={isDisabled}
                                 onClick={handleComplete}
                             />
                         </div>

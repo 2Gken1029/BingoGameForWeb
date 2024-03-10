@@ -28,11 +28,22 @@ class Prize extends Model
      * 指定した条件に基づくデータを取得する
      * 
      * @param array 指定条件
-     * @return collection 検索結果
+     * @return array 検索結果
      */
     public function getData($condition)
     {
         return self::where($condition)->get();
+    }
+
+    /**
+     * 指定した条件に基づくデータをする
+     * 
+     * @param array 指定条件
+     * @return void
+     */
+    public function deleteData($condition)
+    {
+        self::where($condition)->delete();
     }
 
     /**
@@ -47,7 +58,7 @@ class Prize extends Model
             $param = [
                 'game_id' => $id,
                 'prize_number' => $index + 1,
-                'name' => $prize
+                'name' => $prize["name"]
             ];
             self::create($param);
         }
@@ -69,16 +80,28 @@ class Prize extends Model
     }
 
     /**
-     * 景品獲得者情報を設定する
+     * 景品情報を更新する
+     * 
+     * @param 
+     * @return void
+     */
+    public function updatePrize($game_id, $number, $prize)
+    {
+        self::updateOrCreate(
+            ['game_id' => $game_id, 'prize_number' => $number],
+            ['name' => $prize]
+        );
+    }
+
+    /**
+     * 景品獲得者情報を更新する
      * 
      * @param array 更新情報
      * @return void
      */
-    public function updateWinner($data)
+    public function updateWinner($param, $condition)
     {
-        self::find($data["id"])
-            ->update([
-                'winner' => $data["winner"],
-            ]);
+        self::where($param)
+            ->update($condition);
     }
 }

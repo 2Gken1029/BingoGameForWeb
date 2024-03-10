@@ -7,12 +7,29 @@ import Header from "../Header";
 import Button from "../../component/Button";
 import { MdClear, MdAddCircleOutline } from "react-icons/md";
 
-const Create = () => {
+/**
+ * 入力形式に従って、景品情報を編集
+ * @param gameData データベースから取得した景品情報
+ * @return prizeNames 入力形式に従った景品情報
+ */
+function getPrizeNames(gameData) {
+    // 配列 `prize` を `number` 順にソート
+    const sortedPrizes = gameData.sort((a, b) => a.number - b.number);
+    // `prize_name` を作成
+    const prizeNames = sortedPrizes.map((prize) => ({ name: prize.name }));
+
+    return prizeNames;
+}
+
+const Show = () => {
     // バリデーションエラーを管理する定数
-    const { errors: validError } = usePage().props;
+    const { game_detail: gameData, errors: validError } = usePage().props;
     const { register, handleSubmit, control } = useForm({
         defaultValues: {
-            prizes: [{ name: "" }],
+            id: gameData["data"]["id"],
+            name: gameData["data"]["name"],
+            implementation_date: gameData["data"]["implementation_date"],
+            prizes: getPrizeNames(gameData["data"]["prizes"]),
         },
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,7 +55,7 @@ const Create = () => {
         setIsSubmitting(true);
 
         try {
-            router.post("/games/create", { ...data });
+            router.put("/games/update", { ...data });
 
             // 一定時間は処理を受け付けないようにする
             setTimeout(() => {
@@ -51,7 +68,7 @@ const Create = () => {
 
     return (
         <>
-            <Header currentPath="新規登録" />
+            <Header currentPath="大会情報編集" />
             <div className={styles.container}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Label name={"大会名"}>
@@ -129,4 +146,4 @@ const Create = () => {
     );
 };
 
-export default Create;
+export default Show;

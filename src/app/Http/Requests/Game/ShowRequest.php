@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class StoreRequest extends FormRequest
+class ShowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         $conditions = [
-            'name' => 'required|string|max:191',
-            'implementation_date' => 'required|date',
-            'prizes' => 'nullable|array|min:1'
+            'id' => 'required|integer',
         ];
-
-        //景品情報があることを確認する
-        if (request()->filled('prizes')) {
-            $conditions['prizes.*.name'] = 'required|string|max:191';
-        }
 
         return $conditions;
     }
@@ -48,7 +41,7 @@ class StoreRequest extends FormRequest
      */
     public function failedValidation(Validator $validator)
     {
-        session()->flash('flash.error', 'ゲーム情報登録に失敗しました');
+        session()->flash('flash.error', 'ゲーム情報取得に失敗しました');
 
         throw (new ValidationException($validator))
             ->errorBag($this->errorBag)
@@ -62,10 +55,7 @@ class StoreRequest extends FormRequest
     public function attributes()
     {
         $attributes =  [
-            'name' => '大会名',
-            'implementation_date' => '開催日',
-            'prizes' => '景品リスト',
-            'prizes.*.name' => '景品名',
+            'id' => '大会ID',
         ];
 
         return $attributes;

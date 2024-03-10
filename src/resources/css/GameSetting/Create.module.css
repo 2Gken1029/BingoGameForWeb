@@ -49,10 +49,8 @@
 
 .buttonContainer {
     display: flex;
-    justify-content: flex-end;
-    position: fixed;
-    bottom: 5vw;
-    right: 6vw;
+    justify-content: flex-start;
+    bottom: 2vw;
 }
 
 .submitButton {

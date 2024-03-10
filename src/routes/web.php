@@ -24,12 +24,17 @@ Route::get('/', function () {
 Route::controller(GameController::class)->prefix('games')->name('games.')->group(function (): void {
     Route::get('/', 'index')->name('index'); // GameList
     Route::get('/setting', 'create'); // GameSetting
+    Route::get('/detail', 'show');
     Route::post('/create', 'store');
+    Route::put('/update', 'update');
 });
 
 Route::controller(BingoController::class)->prefix('bingo')->name('bingo.')->group(function (): void {
     Route::get('/', 'index'); // StartPage
     Route::get('/game', 'show'); // Bingo
+    Route::post('/suspend', 'suspend'); // 中断
+    Route::post('/complete', 'complete'); // 完了
+
 });
 
 Route::controller(PrizeController::class)->prefix('prize')->name('prize.')->group(function (): void {
