@@ -11,6 +11,8 @@
 
 ![スクリーンショット 2024-03-14 12 41 30](https://github.com/2Gken1029/BingoGameForWeb/assets/70386620/beda65f3-363f-4cb9-9b62-e632470c8576)
 
+![スクリーンショット 2024-03-14 12 41 40](https://github.com/2Gken1029/BingoGameForWeb/assets/70386620/48a338ca-e369-4db6-b4b0-b1e6afd5f479)
+
 ## 使用技術
 
 ### フロントエンド - React(.jsx)
